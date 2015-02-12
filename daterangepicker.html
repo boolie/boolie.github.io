@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>A date range picker for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="daterangepicker-bs3.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="moment.js"></script>
+    <script type="text/javascript" src="daterangepicker.js"></script>
+
+    <!-- Custom styles for this template-->
+    <link href="cover.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">boolie</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a>
+                    </li>
+                    <li><a href="#about">About</a>
+                    </li>
+                    <li><a href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Date Range Picker for Bootstrap</h1>
+        </div>
+        <p id="about" class="lead">This is a fork of the Date Range Picker for Bootstrap by Dan Grossman. While initially being used as a sandbox to try out new features/improvements for the picker, I've made some minor code updates and added an option to the api <code>showRangeInputsOnCustomRangeOnly: false</code> that will turn off the range inputs (apply,cancel,to,from) unless the custom range selector is triggered.</p>
+
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+                <a href="#options2" class="thumbnail">
+                    <img src="screenshots/custom-range-no-labels.png" alt="" class="i">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <a href="#options3" class="thumbnail">
+                    <img src="screenshots/custom-range-w-inputs.png" alt="" class="i">
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <a href="#options1" class="thumbnail">
+                    <img src="screenshots/custom-range-inputs-hidden.png" alt="" class="i">
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- example context -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Usage Examples</h1>
+                <hr />
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Basic Date Range Picker</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div class="input-prepend input-group">
+                                            <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                                            <input type="text" style="width: 200px" name="reservation" id="reservation" class="form-control" value="03/18/2013 - 03/23/2013" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('#reservation').daterangepicker(null, function(start, end, label) {
+                                console.log(start.toISOString(), end.toISOString(), label);
+                            });
+                        });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Basic Single Date Picker</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div class="input-prepend input-group">
+                                            <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                                            <input type="text" style="width: 200px" name="birthday" id="birthday" class="form-control" value="03/18/2013" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('#birthday').daterangepicker({
+                                singleDatePicker: true
+                            }, function(start, end, label) {
+                                console.log(start.toISOString(), end.toISOString(), label);
+                            });
+                        });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Date Range &amp; Time Picker with 30 Minute Increments</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <label class="control-label" for="reservationtime">Choose your check-in and check-out times:</label>
+                                    <div class="controls">
+                                        <div class="input-prepend input-group">
+                                            <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                                            <input type="text" style="width: 400px" name="reservation" id="reservationtime" class="form-control" value="08/01/2013 1:00 PM - 08/01/2013 1:30 PM" class="span4" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('#reservationtime').daterangepicker({
+                                timePicker: true,
+                                timePickerIncrement: 30,
+                                format: 'MM/DD/YYYY h:mm A'
+                            }, function(start, end, label) {
+                                console.log(start.toISOString(), end.toISOString(), label);
+                            });
+                        });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Options Usage</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-success">
+                                <strong>Option Set 1</strong>
+                                <br />Shows a predefined range list while hiding the range controls.
+                            </li>
+                            <li class="list-group-item list-group-item-warning">
+                                <strong>Option Set 2</strong>
+                                <br />Shows custom range calendars, to/from fields and buttons while hiding the range labels.
+                            </li>
+                            <li class="list-group-item list-group-item-info">
+                                <strong>Option Set 3</strong>
+                                <br />Shows custom range labels, calendars, buttons and fields.
+                            </li>
+                        </ul>
+
+                        <div class="well" style="overflow: auto">
+                            <button id="options1" class="btn btn-success" data-range-trigger="optionSet1">Apply Option Set 1</button>
+                            <button id="options2" class="btn btn-warning" data-range-trigger="optionSet2">Apply Option Set 2</button>
+                            <button id="options3" class="btn btn-info" data-range-trigger="optionSet3">Apply Option Set 3</button>
+                            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i><b class="caret"></b>
+                            </div>
+
+                            <script type="text/javascript">
+                            $(document).ready(function() {
+
+                                var cb = function(start, end, label) {
+                                    //console.log('FUNC: cb',start.toISOString(), end.toISOString(), label);
+                                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                                }
+
+                                var ranges = {
+                                    'Today': [moment(), moment()],
+                                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                                    'Last 14 Days': [moment().subtract(13, 'days'), moment()],
+                                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                                };
+
+                                var optionSet1 = {
+                                    startDate: moment().subtract(29, 'days'),
+                                    endDate: moment(),
+                                    minDate: '01/01/2012',
+                                    maxDate: '12/31/2015',
+                                    dateLimit: {
+                                        days: 60
+                                    },
+                                    showDropdowns: true,
+                                    showWeekNumbers: true,
+                                    timePicker: false,
+                                    timePickerIncrement: 1,
+                                    timePicker12Hour: true,
+                                    showRangeInputsOnCustomRangeOnly: true,
+                                    ranges: ranges,
+                                    opens: 'left',
+                                    buttonClasses: ['btn btn-default'],
+                                    applyClass: 'btn-small btn-primary',
+                                    cancelClass: 'btn-small',
+                                    format: 'MM/DD/YYYY',
+                                    separator: ' to ',
+                                    locale: {
+                                        applyLabel: 'Submit',
+                                        cancelLabel: 'Clear',
+                                        fromLabel: 'From',
+                                        toLabel: 'To',
+                                        customRangeLabel: 'Custom',
+                                        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                                        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                        firstDay: 1
+                                    }
+                                };
+
+                                var optionSet2 = {
+                                    startDate: moment().subtract(9, 'days'),
+                                    endDate: moment(),
+                                    opens: 'left',
+                                    showRangeInputsOnCustomRangeOnly: true
+                                };
+
+                                var optionSet3 = {
+                                    startDate: moment().subtract(16, 'days'),
+                                    endDate: moment(),
+                                    opens: 'left',
+                                    showRangeInputsOnCustomRangeOnly: true,
+                                    ranges: ranges
+                                };
+
+                                $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+                                $('#reportrange').daterangepicker(optionSet1, cb);
+                                $('#reportrange').on('show.daterangepicker', function() {
+                                    console.log("show daterangepicker fired");
+                                });
+                                $('#options1').click(function() {
+                                    $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+                                });
+                                $('#options2').click(function() {
+                                    $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+                                });
+                                $('#options3').click(function() {
+                                    $('#reportrange').data('daterangepicker').setOptions(optionSet3, cb);
+                                });
+                                $('#destroy').click(function() {
+                                    $('#reportrange').data('daterangepicker').remove();
+                                });
+                            });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- contact info -->
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" id="contact">Contact</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-xs-4">
+                                <a class="text-muted" href="https://github.com/boolie/bootstrap-daterangepicker/fork">
+                                    <span class="fa fa-code-fork"></span> Fork me</a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a class="text-muted" href="mailto:boolie@users.noreply.github.com">
+                                    <span class="fa fa-envelope-o"></span> Email</a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a class="text-muted" href="https://twitter.com/benjamgs">
+                                    <span class="fa fa-twitter"></span> @benjamgs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- end example context -->
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted">
+                    <p>&copy; 2015 <a href="https://twitter.com/benjamgs">@benjamgs</a>.</p>
+            </div>
+        </footer>
+</body>
+</html>
